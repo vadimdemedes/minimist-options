@@ -1,164 +1,90 @@
 'use strict';
 
-/**
- * Dependencies
- */
+const minimistOptions = require('./');
+const test = require('ava');
 
-var buildOptions = require('./');
-var expect = require('chai').expect;
+function validate(t, input, expected) {
+  t.deepEqual(minimistOptions(input), expected);
+}
 
-
-/**
- * Tests
- */
-
-describe ('minimist-options', function () {
-
-  it ('string option', function () {
-    var srcOptions = {
-      name: 'string'
-    };
-
-    var expectedOptions = {
-      string: ['name']
-    };
-
-    test(srcOptions, expectedOptions);
-  });
-
-  it ('boolean option', function () {
-    var srcOptions = {
-      force: 'boolean'
-    };
-
-    var expectedOptions = {
-      boolean: ['force']
-    };
-
-    test(srcOptions, expectedOptions);
-  });
-
-  it ('number option', function () {
-    var srcOptions = {
-      amount: 'number'
-    };
-
-    var expectedOptions = {};
-
-    test(srcOptions, expectedOptions);
-  });
-
-  it ('alias', function () {
-    var srcOptions = {
-      amount: {
-        alias: 'a'
-      }
-    };
-
-    var expectedOptions = {
-      alias: {
-        a: 'amount'
-      }
-    };
-
-    test(srcOptions, expectedOptions);
-  });
-
-  it ('alias array', function () {
-    var srcOptions = {
-      amount: {
-        aliases: ['a', 'amnt']
-      }
-    };
-
-    var expectedOptions = {
-      alias: {
-        a: 'amount',
-        amnt: 'amount'
-      }
-    };
-
-    test(srcOptions, expectedOptions);
-  });
-
-  it ('alias and string', function () {
-    var srcOptions = {
-      name: {
-        type: 'string',
-        alias: 'n'
-      }
-    };
-
-    var expectedOptions = {
-      string: ['name'],
-      alias: {
-        n: 'name'
-      }
-    };
-
-    test(srcOptions, expectedOptions);
-  });
-
-  it ('alias and boolean', function () {
-    var srcOptions = {
-      force: {
-        type: 'boolean',
-        alias: 'f'
-      }
-    };
-
-    var expectedOptions = {
-      boolean: ['force'],
-      alias: {
-        f: 'force'
-      }
-    };
-
-    test(srcOptions, expectedOptions);
-  });
-
-  it ('alias and number', function () {
-    var srcOptions = {
-      amount: {
-        type: 'number',
-        alias: 'a'
-      }
-    };
-
-    var expectedOptions = {
-      alias: {
-        a: 'amount'
-      }
-    };
-
-    test(srcOptions, expectedOptions);
-  });
-
-  it ('default value', function () {
-    var srcOptions = {
-      amount: {
-        default: 10
-      }
-    };
-
-    var expectedOptions = {
-      default: {
-        amount: 10
-      }
-    };
-
-    test(srcOptions, expectedOptions);
-  });
-
+test('string option', validate, {
+  name: 'string'
+}, {
+  string: ['name']
 });
 
+test('boolean option', validate, {
+  force: 'boolean'
+}, {
+  boolean: ['force']
+});
 
-/**
- * Helpers
- */
+test('number option', validate, {
+  amount: 'number'
+}, {});
 
-function test (srcOptions, expectedOptions) {
-  var destOptions = buildOptions(srcOptions);
+test('alias', validate, {
+  amount: {
+    aliases: 'a'
+  }
+}, {
+  alias: {
+    a: 'amount'
+  }
+});
 
-  expect(destOptions).deep.equal(expectedOptions);
-}
+test('alias array', validate, {
+  amount: {
+    aliases: ['a', 'amnt']
+  }
+}, {
+  alias: {
+    a: 'amount',
+    amnt: 'amount'
+  }
+});
+
+test('alias and string', validate, {
+  name: {
+    type: 'string',
+    aliases: 'n'
+  }
+}, {
+  string: ['name'],
+  alias: {
+    n: 'name'
+  }
+});
+
+test('alias and boolean', validate, {
+  force: {
+    type: 'boolean',
+    aliases: 'f'
+  }
+}, {
+  boolean: ['force'],
+  alias: {
+    f: 'force'
+  }
+});
+
+test('alias and number', validate, {
+  amount: {
+    type: 'number',
+    aliases: 'a'
+  }
+}, {
+  alias: {
+    a: 'amount'
+  }
+});
+
+test('default value', validate, {
+  amount: {
+    default: 10
+  }
+}, {
+  default: {
+    amount: 10
+  }
+});

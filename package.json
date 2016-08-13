@@ -4,7 +4,7 @@
   "description": "Pretty options for minimist",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -22,8 +22,7 @@
   },
   "homepage": "https://github.com/vdemedes/minimist-options#readme",
   "devDependencies": {
-    "chai": "^3.2.0",
-    "mocha": "^2.2.5"
+    "ava": "^0.16.0"
   },
   "dependencies": {
     "is_js": "^0.7.4"
