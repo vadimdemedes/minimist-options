@@ -2,64 +2,60 @@
 
 Write options for [minimist](https://npmjs.org/package/minimist) in a comfortable way.
 
-
-### Installation
+## Installation
 
 ```
 $ npm install minimist-options --save
 ```
 
 
-### Usage
-
-**Without** this module:
-
-```js
-const minimist = require('minimist');
-
-let options = {
-  string: ['name'],
-  boolean: ['force', 'published'],
-  alias: {
-    n: 'name',
-    f: 'force'
-  },
-  default: {
-    name: 'john',
-    f: false
-  }
-};
-
-let args = minimist(options);
-```
-
-**With** this module:
+## Usage
 
 ```js
 const buildOptions = require('minimist-options');
 const minimist = require('minimist');
 
 let options = {
-  name: {
-    type: 'string',
-    alias: 'n',
-    default: 'john'
-  },
+	name: {
+		type: 'string',
+		alias: 'n',
+		default: 'john'
+	},
 
-  force: {
-    type: 'boolean',
-    alias: 'f',
-    default: false
-  },
+	force: {
+		type: 'boolean',
+		alias: 'f',
+		default: false
+	},
 
-  published: 'boolean'
+	published: 'boolean'
 };
 
 let args = minimist(options);
 ```
 
+instead of:
 
-### Tests
+```js
+const minimist = require('minimist');
+
+let options = {
+	string: ['name'],
+	boolean: ['force', 'published'],
+	alias: {
+		n: 'name',
+		f: 'force'
+	},
+	default: {
+		name: 'john',
+		f: false
+	}
+};
+
+let args = minimist(options);
+```
+
+## Tests
 
 [![Circle CI](https://circleci.com/gh/vdemedes/minimist-options.svg?style=svg)](https://circleci.com/gh/vdemedes/minimist-options)
 
@@ -67,7 +63,6 @@ let args = minimist(options);
 $ npm test
 ```
 
-
-### License
+## License
 
 MIT © [Vadym Demedes](http://vadimdemedes.com)
