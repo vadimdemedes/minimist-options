@@ -4,87 +4,87 @@ const minimistOptions = require('./');
 const test = require('ava');
 
 function validate(t, input, expected) {
-  t.deepEqual(minimistOptions(input), expected);
+	t.deepEqual(minimistOptions(input), expected);
 }
 
 test('string option', validate, {
-  name: 'string'
+	name: 'string'
 }, {
-  string: ['name']
+	string: ['name']
 });
 
 test('boolean option', validate, {
-  force: 'boolean'
+	force: 'boolean'
 }, {
-  boolean: ['force']
+	boolean: ['force']
 });
 
 test('number option', validate, {
-  amount: 'number'
+	amount: 'number'
 }, {});
 
 test('alias', validate, {
-  amount: {
-    aliases: 'a'
-  }
+	amount: {
+		aliases: 'a'
+	}
 }, {
-  alias: {
-    a: 'amount'
-  }
+	alias: {
+		a: 'amount'
+	}
 });
 
 test('alias array', validate, {
-  amount: {
-    aliases: ['a', 'amnt']
-  }
+	amount: {
+		aliases: ['a', 'amnt']
+	}
 }, {
-  alias: {
-    a: 'amount',
-    amnt: 'amount'
-  }
+	alias: {
+		a: 'amount',
+		amnt: 'amount'
+	}
 });
 
 test('alias and string', validate, {
-  name: {
-    type: 'string',
-    aliases: 'n'
-  }
+	name: {
+		type: 'string',
+		aliases: 'n'
+	}
 }, {
-  string: ['name'],
-  alias: {
-    n: 'name'
-  }
+	string: ['name'],
+	alias: {
+		n: 'name'
+	}
 });
 
 test('alias and boolean', validate, {
-  force: {
-    type: 'boolean',
-    aliases: 'f'
-  }
+	force: {
+		type: 'boolean',
+		aliases: 'f'
+	}
 }, {
-  boolean: ['force'],
-  alias: {
-    f: 'force'
-  }
+	boolean: ['force'],
+	alias: {
+		f: 'force'
+	}
 });
 
 test('alias and number', validate, {
-  amount: {
-    type: 'number',
-    aliases: 'a'
-  }
+	amount: {
+		type: 'number',
+		aliases: 'a'
+	}
 }, {
-  alias: {
-    a: 'amount'
-  }
+	alias: {
+		a: 'amount'
+	}
 });
 
 test('default value', validate, {
-  amount: {
-    default: 10
-  }
+	amount: {
+		default: 10
+	}
 }, {
-  default: {
-    amount: 10
-  }
+	default: {
+		amount: 10
+	}
 });
