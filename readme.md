@@ -1,4 +1,4 @@
-# minimist-options [![Circle CI](https://circleci.com/gh/vdemedes/minimist-options.svg?style=svg)](https://circleci.com/gh/vdemedes/minimist-options)
+# minimist-options [![Build Status](https://travis-ci.org/vdemedes/minimist-options.svg?branch=master)](https://travis-ci.org/vdemedes/minimist-options)
 
 Write options for [minimist](https://npmjs.org/package/minimist) in a comfortable way.
 
@@ -57,7 +57,7 @@ let args = minimist(options);
 
 ## Tests
 
-[![Circle CI](https://circleci.com/gh/vdemedes/minimist-options.svg?style=svg)](https://circleci.com/gh/vdemedes/minimist-options)
+[![Build Status](https://travis-ci.org/vdemedes/minimist-options.svg?branch=master)](https://travis-ci.org/vdemedes/minimist-options)
 
 ```
 $ npm test
