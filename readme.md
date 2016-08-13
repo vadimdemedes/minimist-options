@@ -1,6 +1,6 @@
 # minimist-options [![Build Status](https://travis-ci.org/vdemedes/minimist-options.svg?branch=master)](https://travis-ci.org/vdemedes/minimist-options)
 
-Write options for [minimist](https://npmjs.org/package/minimist) in a comfortable way.
+> Write options for [minimist](https://npmjs.org/package/minimist) in a comfortable way.
 
 ## Installation
 
@@ -8,14 +8,13 @@ Write options for [minimist](https://npmjs.org/package/minimist) in a comfortabl
 $ npm install minimist-options --save
 ```
 
-
 ## Usage
 
 ```js
 const buildOptions = require('minimist-options');
 const minimist = require('minimist');
 
-let options = {
+const options = {
 	name: {
 		type: 'string',
 		alias: 'n',
@@ -31,7 +30,7 @@ let options = {
 	published: 'boolean'
 };
 
-let args = minimist(options);
+const args = minimist(options);
 ```
 
 instead of:
@@ -39,7 +38,7 @@ instead of:
 ```js
 const minimist = require('minimist');
 
-let options = {
+const options = {
 	string: ['name'],
 	boolean: ['force', 'published'],
 	alias: {
@@ -52,15 +51,7 @@ let options = {
 	}
 };
 
-let args = minimist(options);
-```
-
-## Tests
-
-[![Build Status](https://travis-ci.org/vdemedes/minimist-options.svg?branch=master)](https://travis-ci.org/vdemedes/minimist-options)
-
-```
-$ npm test
+const args = minimist(options);
 ```
 
 ## License
