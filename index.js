@@ -1,48 +1,28 @@
 'use strict';
 
-/**
- * Dependencies
- */
+const isPlainObject = require('is-plain-obj');
+const arrify = require('arrify');
 
-var is = require('is_js');
+function minimistOptions(options) {
+	const result = {};
 
-
-/**
- * Expose option builder
- */
-
-module.exports = buildOptions;
-
-
-/**
- * Build options for minimist module
- */
-
-function buildOptions (options) {
-	// result object for minimist
-	var result = {};
-
-	// keys of options
-	var keys = Object.keys(options);
-
-	keys.forEach(function (key) {
-		var value = options[key];
+	Object.keys(options).forEach(key => {
+		let value = options[key];
 
 		// if short form is used
 		// convert it to long form
 		// e.g. { 'name': 'string' }
-		if (is.string(value)) {
+		if (typeof value === 'string') {
 			value = {
 				type: value
 			};
 		}
 
-		if (is.object(value)) {
-			var props = value;
+		if (isPlainObject(value)) {
+			const props = value;
 
-			// option type
 			if (props.type) {
-				var type = props.type;
+				const type = props.type;
 
 				if (type === 'string') {
 					push(result, 'string', key);
@@ -53,18 +33,12 @@ function buildOptions (options) {
 				}
 			}
 
-			// option aliases
-			var aliases = props.alias || props.aliases || [];
+			const aliases = arrify(props.aliases);
 
-			if (is.not.array(aliases)) {
-				aliases = [aliases];
-			}
-
-			aliases.forEach(function (alias) {
+			aliases.forEach(alias => {
 				insert(result, 'alias', alias, key);
 			});
 
-			// option default value
 			if (props.default) {
 				insert(result, 'default', key, props.default);
 			}
@@ -74,23 +48,9 @@ function buildOptions (options) {
 	return result;
 }
 
+module.exports = minimistOptions;
 
-/**
- * Helpers
- */
-
-
-/**
- * Push a new item to an array
- * and create an array at `prop` key,
- * if it does not exist
- *
- * @param  {Object} obj
- * @param  {String} prop
- * @param  {Mixed} value
- */
-
-function push (obj, prop, value) {
+function push(obj, prop, value) {
 	if (!obj[prop]) {
 		obj[prop] = [];
 	}
@@ -98,19 +58,7 @@ function push (obj, prop, value) {
 	obj[prop].push(value);
 }
 
-
-/**
- * Insert a new key to an object
- * and create an object at `prop` key,
- * if it does not exist
- *
- * @param  {Object} obj
- * @param  {String} prop
- * @param  {String} key
- * @param  {Mixed} value
- */
-
-function insert (obj, prop, key, value) {
+function insert(obj, prop, key, value) {
 	if (!obj[prop]) {
 		obj[prop] = {};
 	}

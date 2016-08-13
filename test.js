@@ -1,7 +1,7 @@
 'use strict';
 
-const minimistOptions = require('./');
 const test = require('ava');
+const minimistOptions = require('./');
 
 function validate(t, input, expected) {
 	t.deepEqual(minimistOptions(input), expected);

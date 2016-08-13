@@ -29,7 +29,8 @@
     "esnext": true
   },
   "dependencies": {
-    "is_js": "^0.7.4"
+    "arrify": "^1.0.1",
+    "is-plain-obj": "^1.1.0"
   },
   "files": [
     "index.js"
