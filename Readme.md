@@ -64,7 +64,7 @@ let args = minimist(options);
 [![Circle CI](https://circleci.com/gh/vdemedes/minimist-options.svg?style=svg)](https://circleci.com/gh/vdemedes/minimist-options)
 
 ```
-$ make test
+$ npm test
 ```
 
 
