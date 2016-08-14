@@ -7,6 +7,8 @@ function validate(t, input, expected) {
 	t.deepEqual(minimistOptions(input), expected);
 }
 
+test('empty input', validate, {}, {});
+
 test('string option', validate, {
 	name: 'string'
 }, {

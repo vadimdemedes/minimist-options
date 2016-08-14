@@ -4,6 +4,10 @@ const isPlainObject = require('is-plain-obj');
 const arrify = require('arrify');
 
 function minimistOptions(options) {
+	if (!options) {
+		options = {};
+	}
+
 	const result = {};
 
 	Object.keys(options).forEach(key => {
