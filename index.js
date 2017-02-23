@@ -3,10 +3,24 @@
 const isPlainObject = require('is-plain-obj');
 const arrify = require('arrify');
 
-function minimistOptions(options) {
-	if (!options) {
-		options = {};
+const push = (obj, prop, value) => {
+	if (!obj[prop]) {
+		obj[prop] = [];
 	}
+
+	obj[prop].push(value);
+};
+
+const insert = (obj, prop, key, value) => {
+	if (!obj[prop]) {
+		obj[prop] = {};
+	}
+
+	obj[prop][key] = value;
+};
+
+module.exports = options => {
+	options = options || {};
 
 	const result = {};
 
@@ -17,9 +31,7 @@ function minimistOptions(options) {
 		// convert it to long form
 		// e.g. { 'name': 'string' }
 		if (typeof value === 'string') {
-			value = {
-				type: value
-			};
+			value = {type: value};
 		}
 
 		if (isPlainObject(value)) {
@@ -50,22 +62,4 @@ function minimistOptions(options) {
 	});
 
 	return result;
-}
-
-module.exports = minimistOptions;
-
-function push(obj, prop, value) {
-	if (!obj[prop]) {
-		obj[prop] = [];
-	}
-
-	obj[prop].push(value);
-}
-
-function insert(obj, prop, key, value) {
-	if (!obj[prop]) {
-		obj[prop] = {};
-	}
-
-	obj[prop][key] = value;
-}
+};

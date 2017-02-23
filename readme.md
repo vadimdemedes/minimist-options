@@ -1,11 +1,11 @@
-# minimist-options [![Build Status](https://travis-ci.org/vdemedes/minimist-options.svg?branch=master)](https://travis-ci.org/vdemedes/minimist-options)
+# minimist-options [![Build Status](https://travis-ci.org/vadimdemedes/minimist-options.svg?branch=master)](https://travis-ci.org/vadimdemedes/minimist-options)
 
 > Write options for [minimist](https://npmjs.org/package/minimist) in a comfortable way.
 
 ## Installation
 
 ```
-$ npm install minimist-options --save
+$ npm install --save minimist-options
 ```
 
 ## Usage
@@ -57,4 +57,4 @@ const args = minimist(options);
 
 ## License
 
-MIT © [Vadym Demedes](http://vadimdemedes.com)
+MIT © [Vadim Demedes](https://vadimdemedes.com)

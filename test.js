@@ -1,11 +1,9 @@
-'use strict';
+import test from 'ava';
+import minimistOptions from '.';
 
-const test = require('ava');
-const minimistOptions = require('./');
-
-function validate(t, input, expected) {
+const validate = (t, input, expected) => {
 	t.deepEqual(minimistOptions(input), expected);
-}
+};
 
 test('empty input', validate, {}, {});
 
