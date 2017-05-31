@@ -17,13 +17,13 @@ const minimist = require('minimist');
 const options = {
 	name: {
 		type: 'string',
-		aliases: 'n',
+		alias: 'n',
 		default: 'john'
 	},
 
 	force: {
 		type: 'boolean',
-		aliases: ['f', 'o'],
+		alias: ['f', 'o'],
 		default: false
 	},
 

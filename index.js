@@ -53,7 +53,7 @@ module.exports = options => {
 				}
 			}
 
-			const aliases = arrify(props.aliases);
+			const aliases = arrify(props.alias);
 
 			aliases.forEach(alias => {
 				insert(result, 'alias', alias, key);

@@ -25,7 +25,7 @@ test('number option', validate, {
 
 test('alias', validate, {
 	amount: {
-		aliases: 'a'
+		alias: 'a'
 	}
 }, {
 	alias: {
@@ -35,7 +35,7 @@ test('alias', validate, {
 
 test('alias array', validate, {
 	amount: {
-		aliases: ['a', 'amnt']
+		alias: ['a', 'amnt']
 	}
 }, {
 	alias: {
@@ -47,7 +47,7 @@ test('alias array', validate, {
 test('alias and string', validate, {
 	name: {
 		type: 'string',
-		aliases: 'n'
+		alias: 'n'
 	}
 }, {
 	string: ['name'],
@@ -59,7 +59,7 @@ test('alias and string', validate, {
 test('alias and boolean', validate, {
 	force: {
 		type: 'boolean',
-		aliases: 'f'
+		alias: 'f'
 	}
 }, {
 	boolean: ['force'],
@@ -71,7 +71,7 @@ test('alias and boolean', validate, {
 test('alias and number', validate, {
 	amount: {
 		type: 'number',
-		aliases: 'a'
+		alias: 'a'
 	}
 }, {
 	alias: {
