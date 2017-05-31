@@ -31,7 +31,7 @@ module.exports = options => {
 			key = '_';
 		}
 
-		// if short form is used
+		// If short form is used
 		// convert it to long form
 		// e.g. { 'name': 'string' }
 		if (typeof value === 'string') {
