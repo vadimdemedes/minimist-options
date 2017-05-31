@@ -19,10 +19,18 @@ const insert = (obj, prop, key, value) => {
 	obj[prop][key] = value;
 };
 
+const passthroughOptions = ['stopEarly', 'unknown', '--'];
+
 module.exports = options => {
 	options = options || {};
 
 	const result = {};
+
+	passthroughOptions.forEach(key => {
+		if (options[key]) {
+			result[key] = options[key];
+		}
+	});
 
 	Object.keys(options).forEach(key => {
 		let value = options[key];

@@ -94,3 +94,13 @@ test('arguments type', validate, {
 }, {
 	string: ['_']
 });
+
+test('passthrough options', validate, {
+	'--': true,
+	stopEarly: true,
+	unknown: true
+}, {
+	'--': true,
+	stopEarly: true,
+	unknown: true
+});
