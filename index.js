@@ -27,6 +27,10 @@ module.exports = options => {
 	Object.keys(options).forEach(key => {
 		let value = options[key];
 
+		if (key === 'arguments') {
+			key = '_';
+		}
+
 		// if short form is used
 		// convert it to long form
 		// e.g. { 'name': 'string' }

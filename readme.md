@@ -27,7 +27,10 @@ const options = {
 		default: false
 	},
 
-	published: 'boolean'
+	published: 'boolean',
+
+	// special option for positional arguments (`_` in minimist)
+	arguments: 'string'
 };
 
 const args = minimist(options);
@@ -39,7 +42,7 @@ instead of:
 const minimist = require('minimist');
 
 const options = {
-	string: ['name'],
+	string: ['name', '_'],
 	boolean: ['force', 'published'],
 	alias: {
 		n: 'name',

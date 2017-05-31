@@ -88,3 +88,9 @@ test('default value', validate, {
 		amount: 10
 	}
 });
+
+test('arguments type', validate, {
+	arguments: 'string'
+}, {
+	string: ['_']
+});
