@@ -14,7 +14,7 @@ $ npm install --save minimist-options
 const buildOptions = require('minimist-options');
 const minimist = require('minimist');
 
-const options = {
+const options = buildOptions({
 	name: {
 		type: 'string',
 		alias: 'n',
@@ -31,7 +31,7 @@ const options = {
 
 	// special option for positional arguments (`_` in minimist)
 	arguments: 'string'
-};
+});
 
 const args = minimist(options);
 ```
