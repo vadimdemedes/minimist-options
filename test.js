@@ -89,6 +89,36 @@ test('default value', validate, {
 	}
 });
 
+test('default falsy value', validate, {
+	falsePrimitive: {
+		default: false
+	},
+	zero: {
+		default: 0
+	},
+	empty: {
+		default: ''
+	},
+	nan: {
+		default: NaN
+	},
+	nullPrimitive: {
+		default: null
+	},
+	undefinedPrimitive: {
+		default: undefined
+	}
+}, {
+	default: {
+		falsePrimitive: false,
+		zero: 0,
+		empty: '',
+		nan: NaN,
+		nullPrimitive: null,
+		undefinedPrimitive: undefined
+	}
+});
+
 test('arguments type', validate, {
 	arguments: 'string'
 }, {
