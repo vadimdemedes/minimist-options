@@ -67,7 +67,7 @@ module.exports = options => {
 				insert(result, 'alias', alias, key);
 			});
 
-			if (Object.prototype.hasOwnProperty.call(props, 'default')) {
+			if ({}.hasOwnProperty.call(props, 'default')) {
 				insert(result, 'default', key, props.default);
 			}
 		}
