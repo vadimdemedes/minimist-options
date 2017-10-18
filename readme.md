@@ -33,7 +33,7 @@ const options = buildOptions({
 	arguments: 'string'
 });
 
-const args = minimist(options);
+const args = minimist(process.argv.slice(2), options);
 ```
 
 instead of:
@@ -55,7 +55,7 @@ const options = {
 	}
 };
 
-const args = minimist(options);
+const args = minimist(process.argv.slice(2), options);
 ```
 
 ## License
