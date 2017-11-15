@@ -5,6 +5,14 @@ const validate = (t, input, expected) => {
 	t.deepEqual(minimistOptions(input), expected);
 };
 
+const fail = (t, input, expected) => {
+	const err = t.throws(() => {
+		minimistOptions(input);
+	}, TypeError);
+
+	t.is(err.message, expected);
+};
+
 test('empty input', validate, {}, {});
 
 test('string option', validate, {
@@ -134,3 +142,26 @@ test('passthrough options', validate, {
 	stopEarly: true,
 	unknown: true
 });
+
+test('fail if type is not boolean|string|number', fail, {
+	force: {
+		type: 'bool',
+		alias: 'f'
+	}
+}, '"force" type must be a boolean or a string, "bool" given');
+
+test('fail if boolean default value is not a boolean', fail, {
+	force: {
+		type: 'boolean',
+		alias: 'f',
+		default: 'true'
+	}
+}, '"force" default value must be a boolean');
+
+test('fail if string default is not a string', fail, {
+	amount: {
+		type: 'string',
+		alias: 'f',
+		default: {}
+	}
+}, '"amount" default value must be a string');
