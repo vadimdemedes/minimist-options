@@ -21,6 +21,8 @@ const insert = (obj, prop, key, value) => {
 
 const passthroughOptions = ['stopEarly', 'unknown', '--'];
 
+const availableTypes = ['string', 'boolean', 'number'];
+
 module.exports = options => {
 	options = options || {};
 
@@ -52,6 +54,10 @@ module.exports = options => {
 			if (props.type) {
 				const type = props.type;
 
+				if (availableTypes.indexOf(type) === -1) {
+					throw new TypeError(`"${key}" type must be a boolean or a string, "${type}" given`);
+				}
+
 				if (type === 'string') {
 					push(result, 'string', key);
 				}
@@ -68,6 +74,13 @@ module.exports = options => {
 			});
 
 			if ({}.hasOwnProperty.call(props, 'default')) {
+				if (props.type && props.type === 'boolean' && typeof props.default !== 'boolean') {
+					throw new TypeError(`"${key}" default value must be a boolean`);
+				}
+				if (props.type && props.type === 'string' && typeof props.default !== 'string') {
+					throw new TypeError(`"${key}" default value must be a string`);
+				}
+
 				insert(result, 'default', key, props.default);
 			}
 		}
