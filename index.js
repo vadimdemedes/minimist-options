@@ -55,7 +55,7 @@ module.exports = options => {
 				const type = props.type;
 
 				if (availableTypes.indexOf(type) === -1) {
-					throw new TypeError(`"${key}" type must be a boolean or a string, "${type}" given`);
+					throw new TypeError(`Expected "${key}" type to be a boolean or a string, got "${type}"`);
 				}
 
 				if (type === 'string') {
@@ -75,10 +75,10 @@ module.exports = options => {
 
 			if ({}.hasOwnProperty.call(props, 'default')) {
 				if (props.type && props.type === 'boolean' && typeof props.default !== 'boolean') {
-					throw new TypeError(`"${key}" default value must be a boolean`);
+					throw new TypeError(`Expected "${key}" default value to be a boolean`);
 				}
 				if (props.type && props.type === 'string' && typeof props.default !== 'string') {
-					throw new TypeError(`"${key}" default value must be a string`);
+					throw new TypeError(`Expected "${key}" default value to be a string`);
 				}
 
 				insert(result, 'default', key, props.default);
