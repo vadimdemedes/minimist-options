@@ -135,17 +135,28 @@ test('passthrough options', validate, {
 	unknown: true
 });
 
-test('fail if type is not boolean|string|number', t => {
+test('fail if type is not boolean, string or number', t => {
 	const error = t.throws(() => {
-		minimistOptions({force: {type: 'bool', alias: 'f'}});
+		minimistOptions({
+			force: {
+				type: 'bool',
+				alias: 'f'
+			}
+		});
 	}, TypeError);
 
-	t.is(error.message, 'Expected "force" type to be a boolean or a string, got "bool"');
+	t.is(error.message, 'Expected "force" to be a boolean or a string, got bool');
 });
 
 test('fail if boolean default value is not a boolean', t => {
 	const error = t.throws(() => {
-		minimistOptions({force: {type: 'boolean', alias: 'f', default: 'true'}});
+		minimistOptions({
+			force: {
+				type: 'boolean',
+				alias: 'f',
+				default: 'true'
+			}
+		});
 	}, TypeError);
 
 	t.is(error.message, 'Expected "force" default value to be a boolean');
@@ -153,7 +164,13 @@ test('fail if boolean default value is not a boolean', t => {
 
 test('fail if string default is not a string', t => {
 	const error = t.throws(() => {
-		minimistOptions({amount: {type: 'string', alias: 'f', default: {}}});
+		minimistOptions({
+			amount: {
+				type: 'string',
+				alias: 'f',
+				default: {}
+			}
+		});
 	}, TypeError);
 
 	t.is(error.message, 'Expected "amount" default value to be a string');
