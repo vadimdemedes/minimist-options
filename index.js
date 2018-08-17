@@ -20,7 +20,6 @@ const insert = (obj, prop, key, value) => {
 };
 
 const passthroughOptions = ['stopEarly', 'unknown', '--'];
-
 const availableTypes = ['string', 'boolean', 'number'];
 
 module.exports = options => {
