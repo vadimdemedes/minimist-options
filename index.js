@@ -55,7 +55,7 @@ module.exports = options => {
 				const type = props.type;
 
 				if (availableTypes.indexOf(type) === -1) {
-					throw new TypeError(`Expected "${key}" type to be a boolean or a string, got "${type}"`);
+					throw new TypeError(`Expected "${key}" to be a boolean or a string, got ${type}`);
 				}
 
 				if (type === 'string') {
