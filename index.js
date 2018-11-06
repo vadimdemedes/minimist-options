@@ -20,7 +20,7 @@ const insert = (obj, prop, key, value) => {
 };
 
 const passthroughOptions = ['stopEarly', 'unknown', '--'];
-const availableTypes = ['string', 'boolean', 'number'];
+const availableTypes = ['string', 'boolean', 'number', 'object'];
 
 module.exports = options => {
 	options = options || {};
@@ -54,7 +54,7 @@ module.exports = options => {
 				const type = props.type;
 
 				if (availableTypes.indexOf(type) === -1) {
-					throw new TypeError(`Expected "${key}" to be a boolean or a string, got ${type}`);
+					throw new TypeError(`Expected "${key}" to be boolean or string, got ${type}`);
 				}
 
 				if (type === 'string') {
@@ -73,11 +73,9 @@ module.exports = options => {
 			});
 
 			if ({}.hasOwnProperty.call(props, 'default')) {
-				if (props.type && props.type === 'boolean' && typeof props.default !== 'boolean') {
-					throw new TypeError(`Expected "${key}" default value to be a boolean`);
-				}
-				if (props.type && props.type === 'string' && typeof props.default !== 'string') {
-					throw new TypeError(`Expected "${key}" default value to be a string`);
+				const defaultType = typeof props.default;
+				if (props.type && defaultType !== props.type) {
+					throw new TypeError(`Expected "${key}" default value to be ${props.type}, got ${typeof props.default}`);
 				}
 
 				insert(result, 'default', key, props.default);
