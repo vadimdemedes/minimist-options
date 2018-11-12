@@ -73,8 +73,7 @@ module.exports = options => {
 			});
 
 			if ({}.hasOwnProperty.call(props, 'default')) {
-				const defaultType = typeof props.default;
-				if (props.type && defaultType !== props.type) {
+				if (props.type && typeof props.default !== props.type) { // eslint-disable-line valid-typeof
 					throw new TypeError(`Expected "${key}" default value to be ${props.type}, got ${typeof props.default}`);
 				}
 
