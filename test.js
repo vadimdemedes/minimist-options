@@ -160,7 +160,7 @@ test('fail if type is not boolean, string, number or object', t => {
 		});
 	}, TypeError);
 
-	t.is(error.message, 'Expected "force" to be boolean or string, got bool');
+	t.is(error.message, 'Expected "force" to be one of ["string", "boolean", "number", "object"], got bool');
 });
 
 test('fail if boolean default value is not a boolean', t => {
