@@ -21,11 +21,15 @@ test('boolean option', validate, {
 
 test('number option', validate, {
 	amount: 'number'
-}, {});
+}, {
+	number: ['amount']
+});
 
 test('object option', validate, {
-	amount: 'object'
-}, {});
+	hash: 'object'
+}, {
+	object: ['hash']
+});
 
 test('alias', validate, {
 	amount: {
@@ -78,19 +82,21 @@ test('alias and number', validate, {
 		alias: 'a'
 	}
 }, {
+	number: ['amount'],
 	alias: {
 		a: 'amount'
 	}
 });
 
 test('alias and object', validate, {
-	amount: {
+	hash: {
 		type: 'object',
-		alias: 'a'
+		alias: 'h'
 	}
 }, {
+	object: ['hash'],
 	alias: {
-		a: 'amount'
+		h: 'hash'
 	}
 });
 

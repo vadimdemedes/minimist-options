@@ -57,13 +57,7 @@ module.exports = options => {
 					throw new TypeError(`Expected "${key}" to be one of ["string", "boolean", "number", "object"], got ${type}`);
 				}
 
-				if (type === 'string') {
-					push(result, 'string', key);
-				}
-
-				if (type === 'boolean') {
-					push(result, 'boolean', key);
-				}
+				push(result, type, key);
 			}
 
 			const aliases = arrify(props.alias);
