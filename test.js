@@ -20,9 +20,9 @@ test('boolean option', validate, {
 });
 
 test('number option', validate, {
-	amount: 'number'
+	score: 'number'
 }, {
-	number: ['amount']
+	number: ['score']
 });
 
 test('object option', validate, {
@@ -32,23 +32,23 @@ test('object option', validate, {
 });
 
 test('alias', validate, {
-	amount: {
-		alias: 'a'
+	score: {
+		alias: 's'
 	}
 }, {
 	alias: {
-		a: 'amount'
+		s: 'score'
 	}
 });
 
 test('alias array', validate, {
-	amount: {
-		alias: ['a', 'amnt']
+	score: {
+		alias: ['s', 'sc']
 	}
 }, {
 	alias: {
-		a: 'amount',
-		amnt: 'amount'
+		s: 'score',
+		sc: 'score'
 	}
 });
 
@@ -77,14 +77,14 @@ test('alias and boolean', validate, {
 });
 
 test('alias and number', validate, {
-	amount: {
+	score: {
 		type: 'number',
-		alias: 'a'
+		alias: 's'
 	}
 }, {
-	number: ['amount'],
+	number: ['score'],
 	alias: {
-		a: 'amount'
+		s: 'score'
 	}
 });
 
@@ -101,12 +101,12 @@ test('alias and object', validate, {
 });
 
 test('default value', validate, {
-	amount: {
+	score: {
 		default: 10
 	}
 }, {
 	default: {
-		amount: 10
+		score: 10
 	}
 });
 
@@ -186,41 +186,41 @@ test('fail if boolean default value is not a boolean', t => {
 test('fail if boolean default value is not a number', t => {
 	const error = t.throws(() => {
 		minimistOptions({
-			amount: {
+			score: {
 				type: 'number',
-				alias: 'a',
+				alias: 's',
 				default: '1'
 			}
 		});
 	}, TypeError);
 
-	t.is(error.message, 'Expected "amount" default value to be number, got string');
+	t.is(error.message, 'Expected "score" default value to be number, got string');
 });
 
 test('fail if string default is not a string', t => {
 	const error = t.throws(() => {
 		minimistOptions({
-			amount: {
+			score: {
 				type: 'string',
-				alias: 'a',
+				alias: 's',
 				default: {}
 			}
 		});
 	}, TypeError);
 
-	t.is(error.message, 'Expected "amount" default value to be string, got object');
+	t.is(error.message, 'Expected "score" default value to be string, got object');
 });
 
 test('fail if object default is not an object', t => {
 	const error = t.throws(() => {
 		minimistOptions({
-			amount: {
+			score: {
 				type: 'object',
-				alias: 'a',
+				alias: 's',
 				default: ''
 			}
 		});
 	}, TypeError);
 
-	t.is(error.message, 'Expected "amount" default value to be object, got string');
+	t.is(error.message, 'Expected "score" default value to be object, got string');
 });
