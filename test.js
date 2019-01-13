@@ -183,7 +183,7 @@ test('fail if boolean default value is not a boolean', t => {
 	t.is(error.message, 'Expected "force" default value to be boolean, got string');
 });
 
-test('fail if boolean default value is not a number', t => {
+test('fail if number default value is not a number', t => {
 	const error = t.throws(() => {
 		minimistOptions({
 			score: {
@@ -197,7 +197,7 @@ test('fail if boolean default value is not a number', t => {
 	t.is(error.message, 'Expected "score" default value to be number, got string');
 });
 
-test('fail if string default is not a string', t => {
+test('fail if string default value is not a string', t => {
 	const error = t.throws(() => {
 		minimistOptions({
 			score: {
@@ -211,7 +211,7 @@ test('fail if string default is not a string', t => {
 	t.is(error.message, 'Expected "score" default value to be string, got object');
 });
 
-test('fail if object default is not an object', t => {
+test('fail if object default value is not an object', t => {
 	const error = t.throws(() => {
 		minimistOptions({
 			score: {
