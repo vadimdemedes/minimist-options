@@ -53,7 +53,7 @@ module.exports = options => {
 			if (props.type) {
 				const type = props.type;
 
-				if (availableTypes.indexOf(type) === -1) {
+				if (!availableTypes.includes(type)) {
 					throw new TypeError(`Expected "${key}" to be one of ["string", "boolean", "number", "array"], got ${type}`);
 				}
 
