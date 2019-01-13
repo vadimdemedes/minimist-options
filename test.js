@@ -26,9 +26,9 @@ test('number option', validate, {
 });
 
 test('array option', validate, {
-	hash: 'array'
+	arr: 'array'
 }, {
-	array: ['hash']
+	array: ['arr']
 });
 
 test('alias', validate, {
@@ -89,14 +89,14 @@ test('alias and number', validate, {
 });
 
 test('alias and array', validate, {
-	hash: {
+	arr: {
 		type: 'array',
-		alias: 'h'
+		alias: 'a'
 	}
 }, {
-	array: ['hash'],
+	array: ['arr'],
 	alias: {
-		h: 'hash'
+		a: 'arr'
 	}
 });
 
