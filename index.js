@@ -49,10 +49,9 @@ module.exports = options => {
 
 		if (isPlainObject(value)) {
 			const props = value;
+			const {type} = props;
 
-			if (props.type) {
-				const type = props.type;
-
+			if (type) {
 				if (!availableTypes.includes(type)) {
 					throw new TypeError(`Expected "${key}" to be one of ["string", "boolean", "number", "array"], got ${type}`);
 				}
@@ -67,12 +66,12 @@ module.exports = options => {
 			});
 
 			if ({}.hasOwnProperty.call(props, 'default')) {
-				if (props.type === 'array' && !Array.isArray(props.default)) {
+				if (type === 'array' && !Array.isArray(props.default)) {
 					throw new TypeError(`Expected "${key}" default value to be array, got ${typeof props.default}`);
 				}
 
-				if (props.type && props.type !== 'array' && typeof props.default !== props.type) { // eslint-disable-line valid-typeof
-					throw new TypeError(`Expected "${key}" default value to be ${props.type}, got ${typeof props.default}`);
+				if (type && type !== 'array' && typeof props.default !== type) { // eslint-disable-line valid-typeof
+					throw new TypeError(`Expected "${key}" default value to be ${type}, got ${typeof props.default}`);
 				}
 
 				insert(result, 'default', key, props.default);
