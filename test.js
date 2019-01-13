@@ -20,27 +20,35 @@ test('boolean option', validate, {
 });
 
 test('number option', validate, {
-	amount: 'number'
-}, {});
+	score: 'number'
+}, {
+	number: ['score']
+});
+
+test('array option', validate, {
+	arr: 'array'
+}, {
+	array: ['arr']
+});
 
 test('alias', validate, {
-	amount: {
-		alias: 'a'
+	score: {
+		alias: 's'
 	}
 }, {
 	alias: {
-		a: 'amount'
+		s: 'score'
 	}
 });
 
 test('alias array', validate, {
-	amount: {
-		alias: ['a', 'amnt']
+	score: {
+		alias: ['s', 'sc']
 	}
 }, {
 	alias: {
-		a: 'amount',
-		amnt: 'amount'
+		s: 'score',
+		sc: 'score'
 	}
 });
 
@@ -69,23 +77,36 @@ test('alias and boolean', validate, {
 });
 
 test('alias and number', validate, {
-	amount: {
+	score: {
 		type: 'number',
+		alias: 's'
+	}
+}, {
+	number: ['score'],
+	alias: {
+		s: 'score'
+	}
+});
+
+test('alias and array', validate, {
+	arr: {
+		type: 'array',
 		alias: 'a'
 	}
 }, {
+	array: ['arr'],
 	alias: {
-		a: 'amount'
+		a: 'arr'
 	}
 });
 
 test('default value', validate, {
-	amount: {
+	score: {
 		default: 10
 	}
 }, {
 	default: {
-		amount: 10
+		score: 10
 	}
 });
 
@@ -133,4 +154,73 @@ test('passthrough options', validate, {
 	'--': true,
 	stopEarly: true,
 	unknown: true
+});
+
+test('fail if type is not boolean, string, number or array', t => {
+	const error = t.throws(() => {
+		minimistOptions({
+			force: {
+				type: 'bool',
+				alias: 'f'
+			}
+		});
+	}, TypeError);
+
+	t.is(error.message, 'Expected "force" to be one of ["string", "boolean", "number", "array"], got bool');
+});
+
+test('fail if boolean default value is not a boolean', t => {
+	const error = t.throws(() => {
+		minimistOptions({
+			force: {
+				type: 'boolean',
+				alias: 'f',
+				default: 'true'
+			}
+		});
+	}, TypeError);
+
+	t.is(error.message, 'Expected "force" default value to be boolean, got string');
+});
+
+test('fail if number default value is not a number', t => {
+	const error = t.throws(() => {
+		minimistOptions({
+			score: {
+				type: 'number',
+				alias: 's',
+				default: '1'
+			}
+		});
+	}, TypeError);
+
+	t.is(error.message, 'Expected "score" default value to be number, got string');
+});
+
+test('fail if string default value is not a string', t => {
+	const error = t.throws(() => {
+		minimistOptions({
+			score: {
+				type: 'string',
+				alias: 's',
+				default: 1
+			}
+		});
+	}, TypeError);
+
+	t.is(error.message, 'Expected "score" default value to be string, got number');
+});
+
+test('fail if array default value is not an array', t => {
+	const error = t.throws(() => {
+		minimistOptions({
+			score: {
+				type: 'array',
+				alias: 's',
+				default: ''
+			}
+		});
+	}, TypeError);
+
+	t.is(error.message, 'Expected "score" default value to be array, got string');
 });

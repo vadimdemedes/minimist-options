@@ -1,6 +1,7 @@
 # minimist-options [![Build Status](https://travis-ci.org/vadimdemedes/minimist-options.svg?branch=master)](https://travis-ci.org/vadimdemedes/minimist-options)
 
 > Write options for [minimist](https://npmjs.org/package/minimist) in a comfortable way.
+> Support string, boolean, number and array options.
 
 ## Installation
 
@@ -27,9 +28,21 @@ const options = buildOptions({
 		default: false
 	},
 
+	score: {
+		type: 'number',
+		alias: 's',
+		default: 0
+	},
+
+	arr: {
+		type: 'array',
+		alias: 'a',
+		default: []
+	},
+
 	published: 'boolean',
 
-	// special option for positional arguments (`_` in minimist)
+	// Special option for positional arguments (`_` in minimist)
 	arguments: 'string'
 });
 
@@ -43,15 +56,20 @@ const minimist = require('minimist');
 
 const options = {
 	string: ['name', '_'],
+	number: ['score'],
+	array: ['arr'],
 	boolean: ['force', 'published'],
 	alias: {
 		n: 'name',
 		f: 'force',
-		o: 'force'
+		s: 'score',
+		a: 'arr'
 	},
 	default: {
 		name: 'john',
-		f: false
+		f: false,
+		score: 0,
+		arr: []
 	}
 };
 

@@ -20,6 +20,7 @@ const insert = (obj, prop, key, value) => {
 };
 
 const passthroughOptions = ['stopEarly', 'unknown', '--'];
+const availableTypes = ['string', 'boolean', 'number', 'array'];
 
 module.exports = options => {
 	options = options || {};
@@ -52,13 +53,11 @@ module.exports = options => {
 			if (props.type) {
 				const type = props.type;
 
-				if (type === 'string') {
-					push(result, 'string', key);
+				if (availableTypes.indexOf(type) === -1) {
+					throw new TypeError(`Expected "${key}" to be one of ["string", "boolean", "number", "array"], got ${type}`);
 				}
 
-				if (type === 'boolean') {
-					push(result, 'boolean', key);
-				}
+				push(result, type, key);
 			}
 
 			const aliases = arrify(props.alias);
@@ -68,6 +67,14 @@ module.exports = options => {
 			});
 
 			if ({}.hasOwnProperty.call(props, 'default')) {
+				if (props.type === 'array' && !Array.isArray(props.default)) {
+					throw new TypeError(`Expected "${key}" default value to be array, got ${typeof props.default}`);
+				}
+
+				if (props.type && props.type !== 'array' && typeof props.default !== props.type) { // eslint-disable-line valid-typeof
+					throw new TypeError(`Expected "${key}" default value to be ${props.type}, got ${typeof props.default}`);
+				}
+
 				insert(result, 'default', key, props.default);
 			}
 		}
