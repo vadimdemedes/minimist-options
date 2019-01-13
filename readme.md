@@ -34,10 +34,10 @@ const options = buildOptions({
 		default: 0
 	},
 
-	hash: {
-		type: 'object',
-		alias: 'h',
-		default: {}
+	arr: {
+		type: 'array',
+		alias: 'a',
+		default: []
 	},
 
 	published: 'boolean',
@@ -55,20 +55,21 @@ instead of:
 const minimist = require('minimist');
 
 const options = {
-	string: ['name', 'score', 'hash', '_'],
+	string: ['name', '_'],
+	number: ['score'],
+	array: ['arr'],
 	boolean: ['force', 'published'],
 	alias: {
 		n: 'name',
 		f: 'force',
-		o: 'force',
 		s: 'score',
-		h: 'hash'
+		a: 'arr'
 	},
 	default: {
 		name: 'john',
 		f: false,
 		score: 0,
-		hash: {}
+		arr: []
 	}
 };
 
