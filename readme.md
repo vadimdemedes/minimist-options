@@ -1,7 +1,7 @@
 # minimist-options [![Build Status](https://travis-ci.org/vadimdemedes/minimist-options.svg?branch=master)](https://travis-ci.org/vadimdemedes/minimist-options)
 
 > Write options for [minimist](https://npmjs.org/package/minimist) in a comfortable way.
-> Support string, boolean, number and object options.
+> Support string, boolean, number and array options.
 
 ## Installation
 
