@@ -25,10 +25,10 @@ test('number option', validate, {
 	number: ['score']
 });
 
-test('object option', validate, {
-	hash: 'object'
+test('array option', validate, {
+	hash: 'array'
 }, {
-	object: ['hash']
+	array: ['hash']
 });
 
 test('alias', validate, {
@@ -88,13 +88,13 @@ test('alias and number', validate, {
 	}
 });
 
-test('alias and object', validate, {
+test('alias and array', validate, {
 	hash: {
-		type: 'object',
+		type: 'array',
 		alias: 'h'
 	}
 }, {
-	object: ['hash'],
+	array: ['hash'],
 	alias: {
 		h: 'hash'
 	}
@@ -156,7 +156,7 @@ test('passthrough options', validate, {
 	unknown: true
 });
 
-test('fail if type is not boolean, string, number or object', t => {
+test('fail if type is not boolean, string, number or array', t => {
 	const error = t.throws(() => {
 		minimistOptions({
 			force: {
@@ -166,7 +166,7 @@ test('fail if type is not boolean, string, number or object', t => {
 		});
 	}, TypeError);
 
-	t.is(error.message, 'Expected "force" to be one of ["string", "boolean", "number", "object"], got bool');
+	t.is(error.message, 'Expected "force" to be one of ["string", "boolean", "number", "array"], got bool');
 });
 
 test('fail if boolean default value is not a boolean', t => {
@@ -203,24 +203,24 @@ test('fail if string default value is not a string', t => {
 			score: {
 				type: 'string',
 				alias: 's',
-				default: {}
+				default: 1
 			}
 		});
 	}, TypeError);
 
-	t.is(error.message, 'Expected "score" default value to be string, got object');
+	t.is(error.message, 'Expected "score" default value to be string, got number');
 });
 
-test('fail if object default value is not an object', t => {
+test('fail if array default value is not an array', t => {
 	const error = t.throws(() => {
 		minimistOptions({
 			score: {
-				type: 'object',
+				type: 'array',
 				alias: 's',
 				default: ''
 			}
 		});
 	}, TypeError);
 
-	t.is(error.message, 'Expected "score" default value to be object, got string');
+	t.is(error.message, 'Expected "score" default value to be array, got string');
 });
