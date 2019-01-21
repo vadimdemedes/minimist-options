@@ -49,9 +49,11 @@ module.exports = options => {
 
 		if (isPlainObject(value)) {
 			const props = value;
-			const {type} = props;
+			let {type} = props;
 
 			if (type) {
+				type = type.toLowerCase();
+
 				if (!availableTypes.includes(type)) {
 					throw new TypeError(`Expected "${key}" to be one of ["string", "boolean", "number", "array"], got ${type}`);
 				}
