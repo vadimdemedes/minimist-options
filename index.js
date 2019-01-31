@@ -65,13 +65,15 @@ module.exports = options => {
 				insert(result, 'alias', alias, key);
 			});
 
-			if ({}.hasOwnProperty.call(props, 'default')) {
-				if (type === 'array' && !Array.isArray(props.default)) {
-					throw new TypeError(`Expected "${key}" default value to be array, got ${typeof props.default}`);
-				}
+			if (Object.prototype.hasOwnProperty.call(props, 'default')) {
+				if (props.default !== undefined) {
+					if (type === 'array' && !Array.isArray(props.default)) {
+						throw new TypeError(`Expected "${key}" default value to be array, got ${typeof props.default}`);
+					}
 
-				if (type && type !== 'array' && typeof props.default !== type) { // eslint-disable-line valid-typeof
-					throw new TypeError(`Expected "${key}" default value to be ${type}, got ${typeof props.default}`);
+					if (type && type !== 'array' && typeof props.default !== type) { // eslint-disable-line valid-typeof
+						throw new TypeError(`Expected "${key}" default value to be ${type}, got ${typeof props.default}`);
+					}
 				}
 
 				insert(result, 'default', key, props.default);

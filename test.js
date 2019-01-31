@@ -110,6 +110,20 @@ test('default value', validate, {
 	}
 });
 
+test('default may always be undefined', validate, {
+	score: {
+		type: 'string',
+		default: undefined
+	}
+}, {
+	default: {
+		score: undefined
+	},
+	string: [
+		'score'
+	]
+});
+
 test('default falsy value', validate, {
 	falsePrimitive: {
 		default: false
