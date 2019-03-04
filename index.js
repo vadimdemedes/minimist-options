@@ -22,7 +22,7 @@ const insert = (obj, prop, key, value) => {
 const passthroughOptions = ['stopEarly', 'unknown', '--'];
 const availableTypes = ['string', 'boolean', 'number', 'array'];
 
-module.exports = options => {
+const buildOptions = options => {
 	options = options || {};
 
 	const result = {};
@@ -70,7 +70,7 @@ module.exports = options => {
 					throw new TypeError(`Expected "${key}" default value to be array, got ${typeof props.default}`);
 				}
 
-				if (type && type !== 'array' && typeof props.default !== type) { // eslint-disable-line valid-typeof
+				if (type && type !== 'array' && typeof props.default !== type) {
 					throw new TypeError(`Expected "${key}" default value to be ${type}, got ${typeof props.default}`);
 				}
 
@@ -81,3 +81,6 @@ module.exports = options => {
 
 	return result;
 };
+
+module.exports = buildOptions;
+module.exports.default = buildOptions;
