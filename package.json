@@ -1,6 +1,6 @@
 {
   "name": "minimist-options",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Pretty options for minimist",
   "repository": "vadimdemedes/minimist-options",
   "author": "Vadim Demedes <vdemedes@gmail.com>",
