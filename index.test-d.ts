@@ -61,7 +61,11 @@ const options = buildOptions({
 
 	published: 'boolean',
 
-	arguments: 'string'
+	arguments: 'string',
+
+	stopEarly: true,
+
+	unknown: (arg: string) => arg.startsWith('-')
 });
 
 minimist(['--option', 'value', 'input'], options);

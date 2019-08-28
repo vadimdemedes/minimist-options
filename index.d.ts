@@ -29,6 +29,11 @@ export type ArrayOption<ArrayContentType = unknown> = BaseOption<
 	'array',
 	ReadonlyArray<ArrayContentType>
 >;
+type MinimistOption = NonNullable<
+	| MinimistOptions['stopEarly']
+	| MinimistOptions['unknown']
+	| MinimistOptions['--']
+>;
 
 export type Options<ArrayOptionContentType = unknown> = {
 	[key: string]:
@@ -36,8 +41,9 @@ export type Options<ArrayOptionContentType = unknown> = {
 		| StringOption
 		| BooleanOption
 		| NumberOption
-		| ArrayOption<ArrayOptionContentType>;
-} & {[K in 'stopEarly' | 'unknown' | '--']?: MinimistOptions[K]};
+		| ArrayOption<ArrayOptionContentType>
+		| MinimistOption;  // XXX: workaround for https://github.com/microsoft/TypeScript/issues/17867
+};
 
 /**
  * Write options for [minimist](https://npmjs.org/package/minimist) in a comfortable way. Support string, boolean, number and array options.
