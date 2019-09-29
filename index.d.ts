@@ -42,7 +42,7 @@ export type Options<ArrayOptionContentType = unknown> = {
 		| BooleanOption
 		| NumberOption
 		| ArrayOption<ArrayOptionContentType>
-		| MinimistOption;  // XXX: workaround for https://github.com/microsoft/TypeScript/issues/17867
+		| MinimistOption;  // Workaround for https://github.com/microsoft/TypeScript/issues/17867
 };
 
 /**
