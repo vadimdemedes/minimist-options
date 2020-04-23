@@ -33,6 +33,27 @@ buildOptions({
 		default: []
 	}
 });
+buildOptions({
+	strings: {
+		type: ['string'],
+		alias: 's',
+		default: ['a']
+	}
+});
+buildOptions({
+	numbers: {
+		type: ['number'],
+		alias: 'n',
+		default: [0]
+	}
+});
+buildOptions({
+	booleans: {
+		type: ['boolean'],
+		alias: 'b',
+		default: [false]
+	}
+});
 
 const options = buildOptions({
 	name: {
@@ -57,6 +78,24 @@ const options = buildOptions({
 		type: 'array',
 		alias: 'a',
 		default: []
+	},
+
+	strings: {
+		type: ['string'],
+		alias: 's',
+		default: ['a']
+	},
+
+	numbers: {
+		type: ['number'],
+		alias: 'n',
+		default: [0]
+	},
+
+	booleans: {
+		type: ['boolean'],
+		alias: 'b',
+		default: [false]
 	},
 
 	published: 'boolean',
