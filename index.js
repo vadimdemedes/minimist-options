@@ -21,9 +21,9 @@ const insert = (obj, prop, key, value) => {
 };
 
 const prettyPrint = output =>
-	Array.isArray(output)
-		? `[${output.map(prettyPrint).join(', ')}]`
-		: kindOf(output) === 'string' ? JSON.stringify(output) : output;
+	Array.isArray(output) ?
+		`[${output.map(prettyPrint).join(', ')}]` :
+		kindOf(output) === 'string' ? JSON.stringify(output) : output;
 
 const passthroughOptions = ['stopEarly', 'unknown', '--'];
 const availableTypes = ['string', 'boolean', 'number', 'array', 'string-array', 'boolean-array', 'number-array'];
@@ -64,9 +64,8 @@ const buildOptions = options => {
 
 				if (type.endsWith('-array')) {
 					const [elementType] = type.split('-');
-					push(result, "array", {key, [elementType]: true});
-				}
-				else {
+					push(result, 'array', {key, [elementType]: true});
+				} else {
 					push(result, type, key);
 				}
 			}
