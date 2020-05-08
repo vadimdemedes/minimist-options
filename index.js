@@ -26,9 +26,7 @@ const prettyPrint = output =>
 		: kindOf(output) === 'string' ? JSON.stringify(output) : output;
 
 const passthroughOptions = ['stopEarly', 'unknown', '--'];
-const primitiveTypes = ['string', 'boolean', 'number'];
-const arrayTypes = primitiveTypes.map(arrify);
-const availableTypes = [...primitiveTypes, 'array', ...arrayTypes];
+const availableTypes = ['string', 'boolean', 'number', 'array', 'string-array', 'boolean-array', 'number-array'];
 
 const buildOptions = options => {
 	options = options || {};
@@ -51,48 +49,34 @@ const buildOptions = options => {
 		// If short form is used
 		// convert it to long form
 		// e.g. { 'name': 'string' }
-		if (typeof value === 'string' || Array.isArray(value)) {
+		if (typeof value === 'string') {
 			value = {type: value};
 		}
 
 		if (isPlainObject(value)) {
 			const props = value;
-			let {type} = props;
+			const {type} = props;
 
-			if (type === 'array') {
-				type = ['string'];
-			}
-
-			const isArrayType = Array.isArray(type);
-
-			if (isArrayType) {
-				const [elementType] = type;
-
-				if (!primitiveTypes.includes(elementType)) {
-					throw new TypeError(`Expected type of "${key}" to be one of ${prettyPrint(arrayTypes)}, got [${(prettyPrint(elementType))}]`);
-				}
-
-				push(result, "array", {key, [elementType]: true});
-			}
-			else if (type) {
+			if (type) {
 				if (!availableTypes.includes(type)) {
 					throw new TypeError(`Expected type of "${key}" to be one of ${prettyPrint(availableTypes)}, got ${prettyPrint(type)}`);
 				}
 
-				push(result, type, key);
+				if (type.endsWith('-array')) {
+					const [elementType] = type.split('-');
+					push(result, "array", {key, [elementType]: true});
+				}
+				else {
+					push(result, type, key);
+				}
 			}
 
 			if ({}.hasOwnProperty.call(props, 'default')) {
 				const {default: defaultValue} = props;
-				const isDefaultArrayType = Array.isArray(defaultValue);
+				const defaultType = Array.isArray(defaultValue) ? `${kindOf(defaultValue[0])}-array` : kindOf(defaultValue);
 
-				if (isArrayType && !(isDefaultArrayType && kindOf(defaultValue[0]) === type[0])) {
-					const [expectedType] = type;
-					const actualType = isDefaultArrayType ? `[${prettyPrint(kindOf(defaultValue[0]))}]` : prettyPrint(kindOf(defaultValue));
-					throw new TypeError(`Expected "${key}" default value to be of type ["${expectedType}"], got ${actualType}`);
-				}
-				else if (type && kindOf(defaultValue) !== type) {
-					throw new TypeError(`Expected "${key}" default value to be of type "${type}", got ${prettyPrint(kindOf(defaultValue))}`);
+				if (type && type !== defaultType) {
+					throw new TypeError(`Expected "${key}" default value to be of type "${type}", got ${prettyPrint(defaultType)}`);
 				}
 
 				insert(result, 'default', key, defaultValue);

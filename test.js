@@ -28,83 +28,71 @@ test('number option', validate, {
 test('default array option', validate, {
 	arr: 'array'
 }, {
-	array: [{key: 'arr', string: true}]
+	array: ['arr']
 });
 
 test('string array option', validate, {
-	arr: ['string']
+	arr: 'string-array'
 }, {
 	array: [{key: 'arr', string: true}]
 });
 
 test('number array option', validate, {
-	arr: ['number']
+	arr: 'number-array'
 }, {
 	array: [{key: 'arr', number: true}]
 });
 
 test('boolean array option', validate, {
-	arr: ['boolean']
+	arr: 'boolean-array'
 }, {
 	array: [{key: 'arr', boolean: true}]
 });
 
 test('multiple array options', validate, {
-	xs: ['number'],
-	ys: ['boolean']
+	xs: 'number-array',
+	ys: 'boolean-array'
 }, {
 	array: [{key: 'xs', number: true}, {key: 'ys', boolean: true}]
-});
-
-test('unsupported array element type fails', t => {
-	const error = t.throws(() => {
-		minimistOptions({
-			arr: {
-				type: ['date']
-			}
-		});
-	}, TypeError);
-
-	t.is(error.message, 'Expected type of "arr" to be one of [["string"], ["boolean"], ["number"]], got ["date"]');
 });
 
 test('string array default value is not string array fails', t => {
 	const error = t.throws(() => {
 		minimistOptions({
 			arr: {
-				type: ['string'],
+				type: 'string-array',
 				default: [2]
 			}
 		});
 	}, TypeError);
 
-	t.is(error.message, 'Expected "arr" default value to be of type ["string"], got ["number"]');
+	t.is(error.message, 'Expected "arr" default value to be of type "string-array", got "number-array"');
 });
 
 test('boolean array default value is not boolean array fails', t => {
 	const error = t.throws(() => {
 		minimistOptions({
 			arr: {
-				type: ['boolean'],
+				type: 'boolean-array',
 				default: ['score']
 			}
 		});
 	}, TypeError);
 
-	t.is(error.message, 'Expected "arr" default value to be of type ["boolean"], got ["string"]');
+	t.is(error.message, 'Expected "arr" default value to be of type "boolean-array", got "string-array"');
 });
 
 test('number array default value is not number array fails', t => {
 	const error = t.throws(() => {
 		minimistOptions({
 			arr: {
-				type: ['number'],
+				type: 'number-array',
 				default: [true]
 			}
 		});
 	}, TypeError);
 
-	t.is(error.message, 'Expected "arr" default value to be of type ["number"], got ["boolean"]');
+	t.is(error.message, 'Expected "arr" default value to be of type "number-array", got "boolean-array"');
 });
 
 test('alias', validate, {
@@ -170,7 +158,7 @@ test('alias and array', validate, {
 		alias: 'a'
 	}
 }, {
-	array: [{key: 'arr', string: true}],
+	array: ['arr'],
 	alias: {
 		a: 'arr'
 	}
@@ -242,7 +230,7 @@ test('fail if type is not boolean, string, number or array', t => {
 		});
 	}, TypeError);
 
-	t.is(error.message, 'Expected type of "force" to be one of ["string", "boolean", "number", "array", ["string"], ["boolean"], ["number"]], got "bool"');
+	t.is(error.message, 'Expected type of "force" to be one of ["string", "boolean", "number", "array", "string-array", "boolean-array", "number-array"], got "bool"');
 });
 
 test('fail if boolean default value is not a boolean', t => {
@@ -298,5 +286,5 @@ test('fail if array default value is not an array', t => {
 		});
 	}, TypeError);
 
-	t.is(error.message, 'Expected "score" default value to be of type ["string"], got "string"');
+	t.is(error.message, 'Expected "score" default value to be of type "array", got "string"');
 });
