@@ -1,7 +1,6 @@
 import {Opts as MinimistOptions} from 'minimist';
 
-type PrimitiveOptionType = 'string' | 'boolean' | 'number';
-export type OptionType = PrimitiveOptionType | 'array' | ReadonlyArray<PrimitiveOptionType>;
+export type OptionType = 'string' | 'boolean' | 'number' | 'array' | 'string-array' | 'boolean-array' | 'number-array';
 
 export interface BaseOption<
 	TypeOptionType extends OptionType,
@@ -27,9 +26,9 @@ export type StringOption = BaseOption<'string', string>;
 export type BooleanOption = BaseOption<'boolean', boolean>;
 export type NumberOption = BaseOption<'number', number>;
 export type DefaultArrayOption = BaseOption<'array', ReadonlyArray<string>>;
-export type StringArrayOption = BaseOption<ReadonlyArray<'string'>, ReadonlyArray<string>>;
-export type NumberArrayOption = BaseOption<ReadonlyArray<'number'>, ReadonlyArray<number>>;
-export type BooleanArrayOption = BaseOption<ReadonlyArray<'boolean'>, ReadonlyArray<boolean>>;
+export type StringArrayOption = BaseOption<'string-array', ReadonlyArray<string>>;
+export type BooleanArrayOption = BaseOption<'boolean-array', ReadonlyArray<boolean>>;
+export type NumberArrayOption = BaseOption<'number-array', ReadonlyArray<number>>;
 
 type MinimistOption = NonNullable<
 	| MinimistOptions['stopEarly']
@@ -45,8 +44,8 @@ export type Options = {
 		| NumberOption
 		| DefaultArrayOption
 		| StringArrayOption
-		| NumberArrayOption
 		| BooleanArrayOption
+		| NumberArrayOption
 		| MinimistOption;  // Workaround for https://github.com/microsoft/TypeScript/issues/17867
 };
 

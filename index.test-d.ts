@@ -5,6 +5,9 @@ buildOptions({name: 'string'});
 buildOptions({force: 'boolean'});
 buildOptions({score: 'number'});
 buildOptions({array: 'array'});
+buildOptions({array: 'string-array'});
+buildOptions({array: 'boolean-array'});
+buildOptions({array: 'number-array'});
 buildOptions({
 	name: {
 		type: 'string',
@@ -35,23 +38,23 @@ buildOptions({
 });
 buildOptions({
 	strings: {
-		type: ['string'],
+		type: 'string-array',
 		alias: 's',
-		default: ['a']
-	}
-});
-buildOptions({
-	numbers: {
-		type: ['number'],
-		alias: 'n',
-		default: [0]
+		default: ['a', 'b']
 	}
 });
 buildOptions({
 	booleans: {
-		type: ['boolean'],
+		type: 'boolean-array',
 		alias: 'b',
-		default: [false]
+		default: [true, false]
+	}
+});
+buildOptions({
+	numbers: {
+		type: 'number-array',
+		alias: 'n',
+		default: [0, 1]
 	}
 });
 
@@ -81,21 +84,21 @@ const options = buildOptions({
 	},
 
 	strings: {
-		type: ['string'],
+		type: 'string-array',
 		alias: 's',
-		default: ['a']
-	},
-
-	numbers: {
-		type: ['number'],
-		alias: 'n',
-		default: [0]
+		default: ['a', 'b']
 	},
 
 	booleans: {
-		type: ['boolean'],
+		type: 'boolean-array',
 		alias: 'b',
-		default: [false]
+		default: [true, false]
+	},
+
+	numbers: {
+		type: 'number-array',
+		alias: 'n',
+		default: [0, 1]
 	},
 
 	published: 'boolean',
