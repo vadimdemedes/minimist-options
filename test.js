@@ -65,7 +65,7 @@ test('unsupported array element type fails', t => {
 		});
 	}, TypeError);
 
-	t.is(error.message, 'Expected "arr" to be one of [["string"], ["boolean"], ["number"]], got ["date"]');
+	t.is(error.message, 'Expected type of "arr" to be one of [["string"], ["boolean"], ["number"]], got ["date"]');
 });
 
 test('string array default value is not string array fails', t => {
@@ -242,7 +242,7 @@ test('fail if type is not boolean, string, number or array', t => {
 		});
 	}, TypeError);
 
-	t.is(error.message, 'Expected "force" to be one of ["string", "boolean", "number", "array", ["string"], ["boolean"], ["number"]], got "bool"');
+	t.is(error.message, 'Expected type of "force" to be one of ["string", "boolean", "number", "array", ["string"], ["boolean"], ["number"]], got "bool"');
 });
 
 test('fail if boolean default value is not a boolean', t => {

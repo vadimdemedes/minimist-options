@@ -69,14 +69,14 @@ const buildOptions = options => {
 				const [elementType] = type;
 
 				if (!primitiveTypes.includes(elementType)) {
-					throw new TypeError(`Expected "${key}" to be one of ${prettyPrint(arrayTypes)}, got [${(prettyPrint(elementType))}]`);
+					throw new TypeError(`Expected type of "${key}" to be one of ${prettyPrint(arrayTypes)}, got [${(prettyPrint(elementType))}]`);
 				}
 
 				push(result, "array", {key, [elementType]: true});
 			}
 			else if (type) {
 				if (!availableTypes.includes(type)) {
-					throw new TypeError(`Expected "${key}" to be one of ${prettyPrint(availableTypes)}, got ${prettyPrint(type)}`);
+					throw new TypeError(`Expected type of "${key}" to be one of ${prettyPrint(availableTypes)}, got ${prettyPrint(type)}`);
 				}
 
 				push(result, type, key);
