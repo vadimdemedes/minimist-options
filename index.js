@@ -56,13 +56,14 @@ const buildOptions = options => {
 		if (isPlainObject(value)) {
 			const props = value;
 			const {type} = props;
+			const isTypedArrayType = type && type.endsWith('-array');
 
 			if (type) {
 				if (!availableTypes.includes(type)) {
 					throw new TypeError(`Expected type of "${key}" to be one of ${prettyPrint(availableTypes)}, got ${prettyPrint(type)}`);
 				}
 
-				if (type.endsWith('-array')) {
+				if (isTypedArrayType) {
 					const [elementType] = type.split('-');
 					push(result, 'array', {key, [elementType]: true});
 				} else {
@@ -72,7 +73,9 @@ const buildOptions = options => {
 
 			if ({}.hasOwnProperty.call(props, 'default')) {
 				const {default: defaultValue} = props;
-				const defaultType = Array.isArray(defaultValue) ? `${kindOf(defaultValue[0])}-array` : kindOf(defaultValue);
+				const defaultType = isTypedArrayType && Array.isArray(defaultValue) && defaultValue.length > 0 ?
+					`${kindOf(defaultValue[0])}-array` :
+					kindOf(defaultValue);
 
 				if (type && type !== defaultType) {
 					throw new TypeError(`Expected "${key}" default value to be of type "${type}", got ${prettyPrint(defaultType)}`);

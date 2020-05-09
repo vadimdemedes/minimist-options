@@ -204,6 +204,30 @@ test('default falsy value', validate, {
 	}
 });
 
+test('default array value', validate, {
+	arr: {
+		type: 'array',
+		default: ['a']
+	}
+}, {
+	array: ['arr'],
+	default: {
+		arr: ['a']
+	}
+});
+
+test('default empty array value', validate, {
+	arr: {
+		type: 'array',
+		default: []
+	}
+}, {
+	array: ['arr'],
+	default: {
+		arr: []
+	}
+});
+
 test('arguments type', validate, {
 	arguments: 'string'
 }, {
