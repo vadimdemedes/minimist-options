@@ -101,7 +101,7 @@ const options = {
 const args = minimist(process.argv.slice(2), options);
 ```
 
-## Note about array options
+## Array options
 
 The `array` types are only supported by [yargs](https://npmjs.org/package/yargs).
 
