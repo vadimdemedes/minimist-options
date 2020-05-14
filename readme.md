@@ -107,7 +107,7 @@ The `array` types are only supported by [yargs](https://npmjs.org/package/yargs)
 
 [minimist](https://npmjs.org/package/minimist) does _not_ explicitly support array type options. If you set an option multiple times, it will indeed yield an array of values. However, if you only set it once, it will simply give the value as is, without wrapping it in an array. Thus, effectively ignoring `{type: 'array'}`.
 
-`{type: 'array'}` is shorthand for `{type: 'string-array'}`. To have values coerced to `boolean` or `number`, use `boolean-array` or `number-array`, resepectively.
+`{type: 'array'}` is shorthand for `{type: 'string-array'}`. To have values coerced to `boolean` or `number`, use `boolean-array` or `number-array`, respectively.
 
 ## License
 
