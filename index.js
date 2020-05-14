@@ -26,7 +26,9 @@ const prettyPrint = output =>
 		kindOf(output) === 'string' ? JSON.stringify(output) : output;
 
 const passthroughOptions = ['stopEarly', 'unknown', '--'];
-const availableTypes = ['string', 'boolean', 'number', 'array', 'string-array', 'boolean-array', 'number-array'];
+const primitiveTypes = ['string', 'boolean', 'number'];
+const arrayTypes = primitiveTypes.map(t => `${t}-array`);
+const availableTypes = [...primitiveTypes, 'array', ...arrayTypes];
 
 const buildOptions = options => {
 	options = options || {};
@@ -56,14 +58,13 @@ const buildOptions = options => {
 		if (isPlainObject(value)) {
 			const props = value;
 			const {type} = props;
-			const isTypedArrayType = type && type.endsWith('-array');
 
 			if (type) {
 				if (!availableTypes.includes(type)) {
 					throw new TypeError(`Expected type of "${key}" to be one of ${prettyPrint(availableTypes)}, got ${prettyPrint(type)}`);
 				}
 
-				if (isTypedArrayType) {
+				if (arrayTypes.includes(type)) {
 					const [elementType] = type.split('-');
 					push(result, 'array', {key, [elementType]: true});
 				} else {
@@ -73,7 +74,7 @@ const buildOptions = options => {
 
 			if ({}.hasOwnProperty.call(props, 'default')) {
 				const {default: defaultValue} = props;
-				const defaultType = isTypedArrayType && Array.isArray(defaultValue) && defaultValue.length > 0 ?
+				const defaultType = arrayTypes.includes(type) && Array.isArray(defaultValue) && defaultValue.length > 0 ?
 					`${kindOf(defaultValue[0])}-array` :
 					kindOf(defaultValue);
 
