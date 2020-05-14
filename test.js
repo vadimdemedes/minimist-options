@@ -220,11 +220,31 @@ test('default empty array value', validate, {
 	arr: {
 		type: 'array',
 		default: []
+	},
+	strings: {
+		type: 'string-array',
+		default: []
+	},
+	booleans: {
+		type: 'boolean-array',
+		default: []
+	},
+	numbers: {
+		type: 'number-array',
+		default: []
 	}
 }, {
-	array: ['arr'],
+	array: [
+		'arr',
+		{key: 'strings', string: true},
+		{key: 'booleans', boolean: true},
+		{key: 'numbers', number: true}
+	],
 	default: {
-		arr: []
+		arr: [],
+		strings: [],
+		booleans: [],
+		numbers: []
 	}
 });
 
@@ -248,8 +268,7 @@ test('fail if type is not boolean, string, number or array', t => {
 	const error = t.throws(() => {
 		minimistOptions({
 			force: {
-				type: 'bool',
-				alias: 'f'
+				type: 'bool'
 			}
 		});
 	}, TypeError);
@@ -262,7 +281,6 @@ test('fail if boolean default value is not a boolean', t => {
 		minimistOptions({
 			force: {
 				type: 'boolean',
-				alias: 'f',
 				default: 'true'
 			}
 		});
@@ -276,7 +294,6 @@ test('fail if number default value is not a number', t => {
 		minimistOptions({
 			score: {
 				type: 'number',
-				alias: 's',
 				default: '1'
 			}
 		});
@@ -290,7 +307,6 @@ test('fail if string default value is not a string', t => {
 		minimistOptions({
 			score: {
 				type: 'string',
-				alias: 's',
 				default: 1
 			}
 		});
@@ -304,11 +320,23 @@ test('fail if array default value is not an array', t => {
 		minimistOptions({
 			score: {
 				type: 'array',
-				alias: 's',
 				default: ''
 			}
 		});
 	}, TypeError);
 
-	t.is(error.message, 'Expected "score" default value to be of type "array", got "string"');
+	t.is(error.message, 'Expected "score" default value to be of type "string-array", got "string"');
+});
+
+test('fail if array default value element type is not string', t => {
+	const error = t.throws(() => {
+		minimistOptions({
+			score: {
+				type: 'array',
+				default: [1]
+			}
+		});
+	}, TypeError);
+
+	t.is(error.message, 'Expected "score" default value to be of type "string-array", got "number-array"');
 });

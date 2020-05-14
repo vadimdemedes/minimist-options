@@ -74,12 +74,16 @@ const buildOptions = options => {
 
 			if ({}.hasOwnProperty.call(props, 'default')) {
 				const {default: defaultValue} = props;
-				const defaultType = arrayTypes.includes(type) && Array.isArray(defaultValue) && defaultValue.length > 0 ?
+				const defaultType = Array.isArray(defaultValue) && defaultValue.length > 0 ?
 					`${kindOf(defaultValue[0])}-array` :
 					kindOf(defaultValue);
+				const inferencedType = type === 'array' ? 'string-array' : type;
+				const expectedType = arrayTypes.includes(inferencedType) && Array.isArray(defaultValue) && defaultValue.length === 0 ?
+					'array' :
+					inferencedType;
 
-				if (type && type !== defaultType) {
-					throw new TypeError(`Expected "${key}" default value to be of type "${type}", got ${prettyPrint(defaultType)}`);
+				if (expectedType && expectedType !== defaultType) {
+					throw new TypeError(`Expected "${key}" default value to be of type "${expectedType}", got ${prettyPrint(defaultType)}`);
 				}
 
 				insert(result, 'default', key, defaultValue);
