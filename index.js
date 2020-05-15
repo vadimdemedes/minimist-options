@@ -25,6 +25,24 @@ const prettyPrint = output =>
 		`[${output.map(prettyPrint).join(', ')}]` :
 		kindOf(output) === 'string' ? JSON.stringify(output) : output;
 
+const resolveType = value => {
+	if (Array.isArray(value) && value.length > 0) {
+		const [element] = value;
+		return `${kindOf(element)}-array`;
+	}
+
+	return kindOf(value);
+};
+
+const normalizeExpectedType = (type, defaultValue) => {
+	const inferedType = type === 'array' ? 'string-array' : type;
+	if (arrayTypes.includes(inferedType) && Array.isArray(defaultValue) && defaultValue.length === 0) {
+		return 'array';
+	}
+
+	return inferedType;
+};
+
 const passthroughOptions = ['stopEarly', 'unknown', '--'];
 const primitiveTypes = ['string', 'boolean', 'number'];
 const arrayTypes = primitiveTypes.map(t => `${t}-array`);
@@ -74,13 +92,8 @@ const buildOptions = options => {
 
 			if ({}.hasOwnProperty.call(props, 'default')) {
 				const {default: defaultValue} = props;
-				const defaultType = Array.isArray(defaultValue) && defaultValue.length > 0 ?
-					`${kindOf(defaultValue[0])}-array` :
-					kindOf(defaultValue);
-				const inferencedType = type === 'array' ? 'string-array' : type;
-				const expectedType = arrayTypes.includes(inferencedType) && Array.isArray(defaultValue) && defaultValue.length === 0 ?
-					'array' :
-					inferencedType;
+				const defaultType = resolveType(defaultValue);
+				const expectedType = normalizeExpectedType(type, defaultValue);
 
 				if (expectedType && expectedType !== defaultType) {
 					throw new TypeError(`Expected "${key}" default value to be of type "${expectedType}", got ${prettyPrint(defaultType)}`);
