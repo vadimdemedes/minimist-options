@@ -37,7 +37,7 @@ const resolveType = value => {
 
 const normalizeExpectedType = (type, defaultValue) => {
 	const inferredType = type === 'array' ? 'string-array' : type;
-	
+
 	if (arrayTypes.includes(inferredType) && Array.isArray(defaultValue) && defaultValue.length === 0) {
 		return 'array';
 	}
