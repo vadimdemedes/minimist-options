@@ -36,12 +36,13 @@ const resolveType = value => {
 };
 
 const normalizeExpectedType = (type, defaultValue) => {
-	const inferedType = type === 'array' ? 'string-array' : type;
-	if (arrayTypes.includes(inferedType) && Array.isArray(defaultValue) && defaultValue.length === 0) {
+	const inferredType = type === 'array' ? 'string-array' : type;
+	
+	if (arrayTypes.includes(inferredType) && Array.isArray(defaultValue) && defaultValue.length === 0) {
 		return 'array';
 	}
 
-	return inferedType;
+	return inferredType;
 };
 
 const passthroughOptions = ['stopEarly', 'unknown', '--'];
