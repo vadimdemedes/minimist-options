@@ -20,10 +20,11 @@ const insert = (obj, prop, key, value) => {
 	obj[prop][key] = value;
 };
 
-const prettyPrint = output =>
-	Array.isArray(output) ?
+const prettyPrint = output => {
+	return Array.isArray(output) ?
 		`[${output.map(prettyPrint).join(', ')}]` :
 		kindOf(output) === 'string' ? JSON.stringify(output) : output;
+};
 
 const resolveType = value => {
 	if (Array.isArray(value) && value.length > 0) {
