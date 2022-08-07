@@ -12,93 +12,93 @@ buildOptions({
 	name: {
 		type: 'string',
 		alias: 'n',
-		default: 'john'
-	}
+		default: 'john',
+	},
 });
 buildOptions({
 	force: {
 		type: 'boolean',
 		alias: ['f', 'o'],
-		default: false
-	}
+		default: false,
+	},
 });
 buildOptions({
 	score: {
 		type: 'number',
 		alias: 's',
-		default: 0
-	}
+		default: 0,
+	},
 });
 buildOptions({
 	arr: {
 		type: 'array',
 		alias: 'a',
-		default: []
-	}
+		default: [],
+	},
 });
 buildOptions({
 	strings: {
 		type: 'string-array',
 		alias: 's',
-		default: ['a', 'b']
-	}
+		default: ['a', 'b'],
+	},
 });
 buildOptions({
 	booleans: {
 		type: 'boolean-array',
 		alias: 'b',
-		default: [true, false]
-	}
+		default: [true, false],
+	},
 });
 buildOptions({
 	numbers: {
 		type: 'number-array',
 		alias: 'n',
-		default: [0, 1]
-	}
+		default: [0, 1],
+	},
 });
 
 const options = buildOptions({
 	name: {
 		type: 'string',
 		alias: 'n',
-		default: 'john'
+		default: 'john',
 	},
 
 	force: {
 		type: 'boolean',
 		alias: ['f', 'o'],
-		default: false
+		default: false,
 	},
 
 	score: {
 		type: 'number',
 		alias: 's',
-		default: 0
+		default: 0,
 	},
 
 	array: {
 		type: 'array',
 		alias: 'a',
-		default: []
+		default: [],
 	},
 
 	strings: {
 		type: 'string-array',
 		alias: 's',
-		default: ['a', 'b']
+		default: ['a', 'b'],
 	},
 
 	booleans: {
 		type: 'boolean-array',
 		alias: 'b',
-		default: [true, false]
+		default: [true, false],
 	},
 
 	numbers: {
 		type: 'number-array',
 		alias: 'n',
-		default: [0, 1]
+		default: [0, 1],
 	},
 
 	published: 'boolean',
@@ -107,7 +107,7 @@ const options = buildOptions({
 
 	stopEarly: true,
 
-	unknown: (arg: string) => arg.startsWith('-')
+	unknown: (arg: string) => arg.startsWith('-'),
 });
 
 minimist(['--option', 'value', 'input'], options);

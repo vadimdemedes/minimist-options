@@ -1,30 +1,26 @@
-'use strict';
+import isPlainObject from 'is-plain-obj';
+import arrify from 'arrify';
+import kindOf from 'kind-of';
 
-const isPlainObject = require('is-plain-obj');
-const arrify = require('arrify');
-const kindOf = require('kind-of');
-
-const push = (obj, prop, value) => {
-	if (!obj[prop]) {
-		obj[prop] = [];
+const push = (object, prop, value) => {
+	if (!object[prop]) {
+		object[prop] = [];
 	}
 
-	obj[prop].push(value);
+	object[prop].push(value);
 };
 
-const insert = (obj, prop, key, value) => {
-	if (!obj[prop]) {
-		obj[prop] = {};
+const insert = (object, prop, key, value) => {
+	if (!object[prop]) {
+		object[prop] = {};
 	}
 
-	obj[prop][key] = value;
+	object[prop][key] = value;
 };
 
-const prettyPrint = output => {
-	return Array.isArray(output) ?
-		`[${output.map(prettyPrint).join(', ')}]` :
-		kindOf(output) === 'string' ? JSON.stringify(output) : output;
-};
+const prettyPrint = output => Array.isArray(output)
+	? `[${output.map(prettyPrint).join(', ')}]`
+	: (kindOf(output) === 'string' ? JSON.stringify(output) : output);
 
 const resolveType = value => {
 	if (Array.isArray(value) && value.length > 0) {
@@ -55,13 +51,13 @@ const buildOptions = options => {
 
 	const result = {};
 
-	passthroughOptions.forEach(key => {
+	for (const key of passthroughOptions) {
 		if (options[key]) {
 			result[key] = options[key];
 		}
-	});
+	}
 
-	Object.keys(options).forEach(key => {
+	for (let key of Object.keys(options)) {
 		let value = options[key];
 
 		if (key === 'arguments') {
@@ -92,7 +88,7 @@ const buildOptions = options => {
 				}
 			}
 
-			if ({}.hasOwnProperty.call(props, 'default')) {
+			if (Object.prototype.hasOwnProperty.call(props, 'default')) {
 				const {default: defaultValue} = props;
 				const defaultType = resolveType(defaultValue);
 				const expectedType = normalizeExpectedType(type, defaultValue);
@@ -104,14 +100,13 @@ const buildOptions = options => {
 				insert(result, 'default', key, defaultValue);
 			}
 
-			arrify(props.alias).forEach(alias => {
+			for (const alias of arrify(props.alias)) {
 				insert(result, 'alias', alias, key);
-			});
+			}
 		}
-	});
+	}
 
 	return result;
 };
 
-module.exports = buildOptions;
-module.exports.default = buildOptions;
+export default buildOptions;
