@@ -4,7 +4,7 @@ export type OptionType = 'string' | 'boolean' | 'number' | 'array' | 'string-arr
 
 export interface BaseOption<
 	TypeOptionType extends OptionType,
-	DefaultOptionType
+	DefaultOptionType,
 > {
 	/**
 	 * The data type the option should be parsed to.
@@ -14,7 +14,7 @@ export interface BaseOption<
 	/**
 	 * An alias/list of aliases for the option.
 	 */
-	readonly alias?: string | ReadonlyArray<string>;
+	readonly alias?: string | readonly string[];
 
 	/**
 	 * The default value for the option.
@@ -25,29 +25,26 @@ export interface BaseOption<
 export type StringOption = BaseOption<'string', string>;
 export type BooleanOption = BaseOption<'boolean', boolean>;
 export type NumberOption = BaseOption<'number', number>;
-export type DefaultArrayOption = BaseOption<'array', ReadonlyArray<string>>;
-export type StringArrayOption = BaseOption<'string-array', ReadonlyArray<string>>;
-export type BooleanArrayOption = BaseOption<'boolean-array', ReadonlyArray<boolean>>;
-export type NumberArrayOption = BaseOption<'number-array', ReadonlyArray<number>>;
+export type DefaultArrayOption = BaseOption<'array', readonly string[]>;
+export type StringArrayOption = BaseOption<'string-array', readonly string[]>;
+export type BooleanArrayOption = BaseOption<'boolean-array', readonly boolean[]>;
+export type NumberArrayOption = BaseOption<'number-array', readonly number[]>;
 
 type MinimistOption = NonNullable<
-	| MinimistOptions['stopEarly']
-	| MinimistOptions['unknown']
-	| MinimistOptions['--']
+| MinimistOptions['stopEarly']
+| MinimistOptions['unknown']
+| MinimistOptions['--']
 >;
 
-export type Options = {
-	[key: string]:
-		| OptionType
-		| StringOption
-		| BooleanOption
-		| NumberOption
-		| DefaultArrayOption
-		| StringArrayOption
-		| BooleanArrayOption
-		| NumberArrayOption
-		| MinimistOption;  // Workaround for https://github.com/microsoft/TypeScript/issues/17867
-};
+export type Options = Record<string, | OptionType
+| StringOption
+| BooleanOption
+| NumberOption
+| DefaultArrayOption
+| StringArrayOption
+| BooleanArrayOption
+| NumberArrayOption
+| MinimistOption>;
 
 /**
  * Write options for [minimist](https://npmjs.org/package/minimist) in a comfortable way. Support string, boolean, number and array options.

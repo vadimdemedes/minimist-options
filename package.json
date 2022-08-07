@@ -5,6 +5,7 @@
   "repository": "vadimdemedes/minimist-options",
   "author": "Vadim Demedes <vdemedes@gmail.com>",
   "license": "MIT",
+  "type": "module",
   "keywords": [
     "minimist",
     "argv",
@@ -14,21 +15,28 @@
     "test": "xo && ava && tsd-check"
   },
   "engines": {
-    "node": ">= 6"
+    "node": ">=14"
   },
   "files": [
     "index.js",
     "index.d.ts"
   ],
   "dependencies": {
-    "arrify": "^1.0.1",
-    "is-plain-obj": "^1.1.0",
+    "arrify": "^3.0.0",
+    "is-plain-obj": "^4.1.0",
     "kind-of": "^6.0.3"
   },
   "devDependencies": {
-    "@types/minimist": "^1.2.0",
-    "ava": "^1.0.1",
-    "tsd-check": "^0.3.0",
-    "xo": "^0.24.0"
-  }
+    "@types/minimist": "^1.2.2",
+    "ava": "^4.3.1",
+    "tsd-check": "^0.6.0",
+    "xo": "^0.51.0"
+  },
+    "xo": {
+      "rules": {
+        "unicorn/no-array-callback-reference": "off",
+        "import/no-extraneous-dependencies": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off"
+      }
+    }
 }
